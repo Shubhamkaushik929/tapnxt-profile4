@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Digital Business Profile</title>
+<style>
+:root{--ink:#111;--muted:#696969;--line:#e7e7e7;--paper:#fff;--soft:#f6f6f6}
+*{box-sizing:border-box}
+body{margin:0;background:#f1f1f1;color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;min-height:100vh;display:grid;place-items:center;padding:22px}
+.card{width:min(100%,440px);background:var(--paper);border:1px solid var(--line);border-radius:26px;padding:25px 23px 21px;box-shadow:0 18px 60px #0000000c}
+.header{display:flex;align-items:center;gap:12px;padding-bottom:19px;border-bottom:1px solid var(--line)}
+.logo{width:56px;height:56px;flex:none;border:1px solid var(--line);border-radius:14px;background:#fafafa;display:grid;place-items:center;overflow:hidden;color:#111;font-weight:800;font-size:14px}
+.logo img{width:100%;height:100%;object-fit:contain}
+.brandtext{min-width:0}
+.brandtext strong{font-size:15px;display:block;overflow-wrap:anywhere}
+.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-top:5px}
+.profile{text-align:center;padding:25px 0 20px}
+.avatar{width:82px;height:82px;border-radius:50%;margin:0 auto 15px;background:#111;color:white;display:grid;place-items:center;font-size:23px;font-weight:750;overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover}
+h1{font-size:27px;letter-spacing:-.04em;line-height:1.15;margin:0 0 8px}
+.role{font-size:14px;line-height:1.5;color:#414141;margin:0}
+.company{font-weight:700;color:#111}
+.about{font-size:13px;line-height:1.7;color:#555;margin:15px auto 0;max-width:340px;white-space:pre-line}
+.section-title{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);font-weight:750;margin:22px 0 10px}
+.actions{display:grid;gap:9px}
+.action{display:flex;align-items:center;gap:11px;padding:12px 13px;border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);font-size:13px;overflow-wrap:anywhere;min-height:46px}
+.action:hover,.social:hover{border-color:#999;background:#fafafa}
+.action .symbol{width:27px;height:27px;flex:none;display:grid;place-items:center;background:var(--soft);border-radius:8px;font-weight:750}
+.action .label{font-size:10px;color:var(--muted);display:block;margin-bottom:2px;text-transform:uppercase;letter-spacing:.08em}
+.action .value{font-weight:600;overflow-wrap:anywhere}
+.socials{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.social{border:1px solid var(--line);border-radius:11px;padding:12px 10px;text-decoration:none;color:var(--ink);font-size:12px;font-weight:650;text-align:center;overflow-wrap:anywhere}
+.social[hidden]{display:none}
+.footer{border-top:1px solid var(--line);margin-top:22px;padding-top:15px;display:flex;justify-content:space-between;gap:10px;color:#858585;font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+[hidden]{display:none!important}
+@media(max-width:360px){body{padding:9px}.card{padding:20px 15px}h1{font-size:24px}}
+</style>
+</head>
+<body>
+<main class="card">
+  <header class="header">
+    <div class="logo" id="companyLogo" aria-label="Company logo">LOGO</div>
+    <div class="brandtext">
+      <strong id="companyName">Company Name</strong>
+      <div class="eyebrow">Professional Business Profile</div>
+    </div>
+  </header>
+  <section class="profile">
+    <div class="avatar" id="avatar" aria-label="Profile initials">YN</div>
+    <h1 id="personName">Your Name</h1>
+    <p class="role"><span id="jobTitle">Current Job Title</span><span id="roleSeparator"> · </span><span class="company" id="profileCompany">Company Name</span></p>
+    <p class="about" id="about">A short introduction about the person or company.</p>
+  </section>
+  <section id="contactSection">
+    <p class="section-title">Contact details</p>
+    <div class="actions">
+      <a class="action" id="phoneLink" href="#"><span class="symbol">☎</span><span><span class="label">Phone</span><span class="value" id="phoneText">Add phone number</span></span></a>
+      <a class="action" id="emailLink" href="#"><span class="symbol">✉</span><span><span class="label">Email</span><span class="value" id="emailText">Add email address</span></span></a>
+      <a class="action" id="addressLink" href="#" target="_blank" rel="noopener"><span class="symbol">⌖</span><span><span class="label">Company address / location</span><span class="value" id="addressText">Add company address</span></span></a>
+      <a class="action" id="websiteLink" href="#" target="_blank" rel="noopener"><span class="symbol">↗</span><span><span class="label">Company website</span><span class="value" id="websiteText">Add company website</span></span></a>
+    </div>
+  </section>
+  <section id="socialSection">
+    <p class="section-title">Professional profile</p>
+    <nav class="socials">
+      <a class="social" id="linkedinLink" href="#" target="_blank" rel="noopener">LinkedIn Profile ↗</a>
+      <a class="social" id="mapLink" href="#" target="_blank" rel="noopener">View Location ↗</a>
+    </nav>
+  </section>
+  <footer class="footer"><span>Digital Business Card</span><span>Tap · Connect · Save</span></footer>
+</main>
+<script>
+/*
+  PERSONALISE THIS OBJECT for each client.
+  For URLs, include https://. Leave a value blank if the client doesn't have it.
+  Photo and companyLogo can be publicly accessible image URLs.
+*/
+const profile = {
+  name: "Your Name",
+  jobTitle: "Current Job Title",
+  company: "Company Name",
+  about: "Write a short introduction about the person, company, services, or expertise.",
+  phone: "",
+  email: "",
+  address: "",
+  location: "",             // optional map location / Google Maps URL
+  companyWebsite: "",
+  linkedin: "",
+  photo: "",                // optional public profile photo URL
+  companyLogo: ""           // optional public company logo URL
+};
+
+const $ = id => document.getElementById(id);
+const text = (id, value, fallback="") => { $(id).textContent = value || fallback; };
+const initials = (profile.name || "Your Name").trim().split(/\s+/).slice(0,2).map(x=>x[0]||"").join("").toUpperCase() || "YN";
+text("personName", profile.name, "Your Name");
+text("jobTitle", profile.jobTitle);
+text("companyName", profile.company, "Company Name");
+text("profileCompany", profile.company, "Company Name");
+text("about", profile.about);
+$("avatar").textContent = initials;
+if (profile.photo) {
+  const img = document.createElement("img"); img.src = profile.photo; img.alt = profile.name + " profile photo";
+  $("avatar").replaceChildren(img);
+}
+if (profile.companyLogo) {
+  const img = document.createElement("img"); img.src = profile.companyLogo; img.alt = (profile.company || "Company") + " logo";
+  $("companyLogo").replaceChildren(img);
+} else {
+  $("companyLogo").textContent = (profile.company || "LOGO").trim().split(/\s+/).slice(0,2).map(x=>x[0]||"").join("").toUpperCase() || "LOGO";
+}
+text("phoneText", profile.phone, "Add phone number");
+$("phoneLink").href = profile.phone ? "tel:" + profile.phone.replace(/[^\d+]/g, "") : "#";
+if (!profile.phone) $("phoneLink").hidden = true;
+text("emailText", profile.email, "Add email address");
+$("emailLink").href = profile.email ? "mailto:" + profile.email : "#";
+if (!profile.email) $("emailLink").hidden = true;
+text("addressText", profile.address, "Add company address");
+const mapQuery = profile.location || profile.address;
+$("addressLink").href = mapQuery ? "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(mapQuery) : "#";
+if (!profile.address && !profile.location) $("addressLink").hidden = true;
+text("websiteText", profile.companyWebsite, "Add company website");
+$("websiteLink").href = profile.companyWebsite || "#";
+if (!profile.companyWebsite) $("websiteLink").hidden = true;
+$("linkedinLink").href = profile.linkedin || "#";
+if (!profile.linkedin) $("linkedinLink").hidden = true;
+$("mapLink").href = mapQuery ? "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(mapQuery) : "#";
+if (!mapQuery) $("mapLink").hidden = true;
+if (!$("socialSection").querySelector("a:not([hidden])")) $("socialSection").hidden = true;
+if (!$("contactSection").querySelector("a:not([hidden])")) $("contactSection").hidden = true;
+text("roleSeparator", profile.jobTitle && profile.company ? " · " : "");
+document.title = (profile.name || "Digital Business Profile") + " | Digital Card";
+</script>
+</body>
+</html>
